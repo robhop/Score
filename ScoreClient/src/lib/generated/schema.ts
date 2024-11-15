@@ -4,18 +4,14 @@
 /* eslint-disable */
 
 export type Scalars = {
-    String: string,
     Boolean: boolean,
-}
-
-export interface Author {
-    name: Scalars['String']
-    __typename: 'Author'
+    Int: number,
+    String: string,
 }
 
 export interface Book {
+    author: Scalars['String']
     title: Scalars['String']
-    author: Author
     __typename: 'Book'
 }
 
@@ -36,18 +32,16 @@ export interface SubscriptionType {
 
 export type Subscription = SubscriptionType
 
-export interface AuthorGenqlSelection{
-    name?: boolean | number
+export interface AuthorInput {name: Scalars['String']}
+
+export interface BookGenqlSelection{
+    author?: boolean | number
+    title?: boolean | number
     __typename?: boolean | number
     __scalar?: boolean | number
 }
 
-export interface BookGenqlSelection{
-    title?: boolean | number
-    author?: AuthorGenqlSelection
-    __typename?: boolean | number
-    __scalar?: boolean | number
-}
+export interface BookInput {author: AuthorInput,title: Scalars['String']}
 
 export interface MutationGenqlSelection{
     addBook?: (BookGenqlSelection & { __args: {book: BookInput} })
@@ -67,19 +61,7 @@ export interface SubscriptionTypeGenqlSelection{
     __scalar?: boolean | number
 }
 
-export interface AuthorInput {name: Scalars['String']}
-
-export interface BookInput {title: Scalars['String'],author: AuthorInput}
-
 export type SubscriptionGenqlSelection = SubscriptionTypeGenqlSelection
-
-
-    const Author_possibleTypes: string[] = ['Author']
-    export const isAuthor = (obj?: { __typename?: any } | null): obj is Author => {
-      if (!obj?.__typename) throw new Error('__typename is missing in "isAuthor"')
-      return Author_possibleTypes.includes(obj.__typename)
-    }
-    
 
 
     const Book_possibleTypes: string[] = ['Book']

@@ -9,6 +9,7 @@ public class SubscriptionType : ObjectType
     {
         descriptor
             .Field("bookAdded")
+            .Type<BookType>()
             .Resolve(context => context.GetEventMessage<Book>())
             .Subscribe(async context =>
             {

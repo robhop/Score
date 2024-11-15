@@ -1,77 +1,71 @@
 export default {
     "scalars": [
-        1,
+        3,
+        4,
         7
     ],
     "types": {
-        "Author": {
+        "AuthorInput": {
             "name": [
-                1
+                7
             ],
             "__typename": [
-                1
+                7
             ]
         },
-        "String": {},
         "Book": {
-            "title": [
-                1
+            "author": [
+                7
             ],
+            "title": [
+                7
+            ],
+            "__typename": [
+                7
+            ]
+        },
+        "BookInput": {
             "author": [
                 0
             ],
+            "title": [
+                7
+            ],
             "__typename": [
-                1
+                7
             ]
         },
+        "Boolean": {},
+        "Int": {},
         "Mutation": {
             "addBook": [
-                2,
+                1,
                 {
                     "book": [
-                        6,
+                        2,
                         "BookInput!"
                     ]
                 }
             ],
             "__typename": [
-                1
+                7
             ]
         },
         "Query": {
             "book": [
-                2
-            ],
-            "__typename": [
-                1
-            ]
-        },
-        "AuthorInput": {
-            "name": [
                 1
             ],
             "__typename": [
-                1
+                7
             ]
         },
-        "BookInput": {
-            "title": [
-                1
-            ],
-            "author": [
-                5
-            ],
-            "__typename": [
-                1
-            ]
-        },
-        "Boolean": {},
+        "String": {},
         "Subscription": {
             "bookAdded": [
-                2
+                1
             ],
             "__typename": [
-                1
+                7
             ]
         }
     }

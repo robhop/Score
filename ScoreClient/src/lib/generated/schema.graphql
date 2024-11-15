@@ -12,15 +12,20 @@ directive @cost(
   The `weight` argument defines what value to add to the overall cost for every appearance, or possible appearance, of a type, field, argument, etc.
   """
   weight: String!
-) on SCALAR | OBJECT | FIELD_DEFINITION | ARGUMENT_DEFINITION | ENUM | INPUT_FIELD_DEFINITION
+) on ARGUMENT_DEFINITION | ENUM | FIELD_DEFINITION | INPUT_FIELD_DEFINITION | OBJECT | SCALAR
 
-type Author {
+input AuthorInput {
   name: String!
 }
 
 type Book {
+  author: String!
   title: String!
-  author: Author!
+}
+
+input BookInput {
+  author: AuthorInput!
+  title: String!
 }
 
 type Mutation {
@@ -33,13 +38,4 @@ type Query {
 
 type SubscriptionType {
   bookAdded: Book
-}
-
-input AuthorInput {
-  name: String!
-}
-
-input BookInput {
-  title: String!
-  author: AuthorInput!
 }
