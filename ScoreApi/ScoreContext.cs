@@ -5,21 +5,39 @@ public class ScoreContext : DbContext
 {
     required public DbSet<Board> Boards { get; set; }
 
-    public string DbPath { get; }
-
     public ScoreContext()
     {
-        var folder = Environment.SpecialFolder.LocalApplicationData;
-        var path = Environment.GetFolderPath(folder);
-        DbPath = "blogging.db";
     }
 
     public ScoreContext(DbContextOptions<ScoreContext> options) : base(options) {
-       DbPath = ""; 
     }
 
-    // The following configures EF to create a Sqlite database file in the
-    // special "local" folder for your platform.
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseSqlite($"Data Source={DbPath}");
+    /*
+       protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+       {
+           optionsBuilder.UseSqlite("Data Source=score.db");
+       }
+
+       */
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        var board = modelBuilder.Entity<Board>( board => {
+            board.Property(b => b.BoardId)
+            .ValueGeneratedOnAdd();
+            board.HasKey(b => b.BoardId);
+            board.HasMany(b => b.Scores)
+                .WithOne(s => s.Board);
+        });
+
+        var score = modelBuilder.Entity<Score>(score => {
+            score.Property(s => s.ScoreId)
+            .ValueGeneratedOnAdd();
+            score.HasKey(s => s.ScoreId);
+            score.HasOne(s => s.Board)
+                .WithMany(b => b.Scores);
+        });
+    }
 }

@@ -1,8 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ScoreApi.Models;
 
 public class Board
 {
-    public int BoardId { get; set; }
+    [Key]
+    [Required]
+    public Guid BoardId { get; set; }
     public string Name { get; set; } = "";
+    public List<Score> Scores { get; set; } = [];
 
 }

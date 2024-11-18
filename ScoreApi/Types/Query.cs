@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ScoreApi.Models;
 
 namespace ScoreApi.Types;
@@ -9,6 +10,8 @@ public static class Query
         => new Book("C# in depth.", new Author("Jon Skeet"));
 
    public static IEnumerable<Board> GetBoards(ScoreContext scoreContext) {
-    return scoreContext.Boards;
+    return scoreContext.Boards
+     .AsNoTrackingWithIdentityResolution()
+     .Include(b => b.Scores);
    } 
 }
