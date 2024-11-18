@@ -1,7 +1,6 @@
 using HotChocolate.Execution;
 using HotChocolate.Subscriptions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using ScoreApi.Models;
 
 namespace ScoreApi.Types;
